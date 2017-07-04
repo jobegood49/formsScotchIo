@@ -1,17 +1,26 @@
 <form>
-  <div class="form-group">
+  <div class="form-group" [ngClass]="{ 'error': name.invalid && name.touched}">
     <label>Name</label>
     <input type="text" class="form-control" name="name" required
-           [(ngModel)]="user.name" #name>
-    {{name.className}}
+           [(ngModel)]="user.name" #name="ngModel">
+    <br>
+    Valid: {{ name.valid }}
+    <br>
+    Touched: {{ name.touched }}
+    <br>
+    <small class="error" *ngIf="name.invalid && name.touched">Name is required</small>
   </div>
 
   <div class="form-group">
     <label>Username</label>
     <input type="text" class="form-control" name="username" required
            [(ngModel)]="user.username" #username>
+    <br>
     {{username.className}}
   </div>
+  <label class="error">Error
+    <input type="text" class="error" />
+  </label>
 
   <div class="form-group">
     <button type="submit" class="btn btn-primary">Save</button>
